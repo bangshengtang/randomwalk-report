@@ -1,1 +1,66 @@
-test
+\subsubsection{Transition Matrix}
+For a graph $G=(V,E)$ we define the \emph{transition probability matrix} $P(u,v)$ by
+\begin{eqnarray*}
+P(u,v)=\left\{
+\begin{array}{cc}
+1\over d_u & \textrm{if u $\sim$ v}\\
+0 & \textrm{otherwise}
+\end{array}
+\right.
+\end{eqnarray*}
+where $d_u$ denotes the degree of a vertex $u$ and $u\sim v$ notation for
+$\{u,v\}\in E$.
+
+We represent a distribution on $G$ by a row vector $f$ whose $i$th entry gives the
+``amount'' residing at the $i$th vertex $v_i$. A typical initial distribution might
+be $\overrightarrow{\mathbf{1}}=(1,1,\dots,1)$, or the row vector $e^*_i$ with all
+entries zero except for a one in the $i$th entry. One should note that normalization
+is needed when necessary.
+
+If $f$ is the initial distribution, then $fP$ is the distribution after one step,
+and $fP^t$ is the distribution after $t$ steps. In a sense, we are considering all
+possible random walks simultaneously; for instance, if $f=e^*_i$, the $j$th entry of
+$fP^t$ is the likelihood that if we start a walk at vertex $v_i$ and continue for
+$t$ random steps that we will find ourselves at vertex $v_j$.
+
+\subsubsection{Stable Distributions}
+A distribution $\pi$ is said to be \emph{stable} if the following condition is
+satisfied,
+\begin{eqnarray*}
+\pi = \pi \cdot P
+\end{eqnarray*}
+
+For a regular graph, it is easy to check that, the uniform distribution
+$\overrightarrow{\mathbf{1}}$ is a stable distribution.
+
+Generally, if $G=(V,E)$ is an undirected graph and $S\subseteq V$ is arbitrary, then
+define the \emph{Volume} of $S$ by
+\begin{eqnarray*}
+\text{vol} S&=&\sum_{v\in S}d_v\\
+&=&\sum_{v\in S}\text{vol} v
+\end{eqnarray*}
+vol$G$ is defined to be vol$V$.
+
+For an undirected graph $G=(V,E)$, one may check that the following distribution
+$\pi$
+\begin{eqnarray*}
+\pi&=&\left(d_u\over\text{vol}G\right)\\
+&=&\left({d_1\over \text{vol}G}, \dots, {d_n\over\text{vol}G}\right)
+\end{eqnarray*}
+is stable.
+
+Similarly, if $G$ is directed, then let $d^+_u$ and $d^-_u$ denote the outdegree and
+indegree of the vertex $u$, respectively. Here we do not define the volume of an
+arbitrary subset of $V$; we define only
+\begin{eqnarray*}
+\text{vol}G=\sum_{u\in V}d^+_u=\sum_{v\in V}d^-_v
+\end{eqnarray*}
+But we are not so lucky when considering stable distribution. Define $\pi^+$ and
+$\pi^-$
+\begin{eqnarray*}
+\pi^+=\left({d^+_u\over\text{vol}G}\right)\\
+\pi^-=\left({d^-_u\over\text{vol}G}\right)
+\end{eqnarray*}
+Then $\pi^+P=\pi^-$, so that there is no hope of obtaining a stable distribution as
+we have done above for undirected graphs. In fact, the equation $fP=f$ has no closed
+form solution for $f$ in general.
