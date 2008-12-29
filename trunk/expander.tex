@@ -1,5 +1,40 @@
+In order to introduce expander graph, the following definitions are of great importance.
+
 \subsubsection{Cheeger's Constant}
+Suppose we are given a graph $G=(V,E)$ and a subset $S\subseteq V$. We wish to define the following
+two sets:
+\begin{eqnarray*}
+	\partial S=\{\{u,v\}|u\in S, v\not\in S\}
+\end{eqnarray*}
+and
+\begin{eqnarray*}
+	\delta S=\{v\not\in S|v\sim u, u\in S\}
+\end{eqnarray*}
+
+\begin{definition}
+	The \emph{Cheeger Ratio} for a vertex set $S$ is
+	\begin{eqnarray*}
+		h(S)={|\partial S|\over\min{\text{vol}(S),\text{vol}(\bar{S})}}
+	\end{eqnarray*}
+	where, $\bar{S}=V-S$
+\end{definition}
+
+\begin{definition}
+	For any graph $G=(V,E)$, the \emph{Cheeger Constant} of $G$ is given by
+	\begin{eqnarray*}
+		h_G=\min_{S}h(S)
+	\end{eqnarray*}
+\end{definition}
 
 \subsubsection{Cheeger's Inequality}
+\begin{theorem}
+	For any graph $G$,
+	\begin{eqnarray*}
+		2h_G\ge \lambda_1\ge {h_G^2\over 2}
+	\end{eqnarray*}
+\end{theorem}
+
+\subsubsection{Expander Graph}
+
 
 \subsubsection{Facts}
