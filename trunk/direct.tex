@@ -1,3 +1,47 @@
 \subsubsection{Definitions}
+In contrast to the undirected cases, the transition matrix would not be symmetric
+here.
 
-\subsubsection{Perron-Fr$\ddot{o}$benius Theorem}
+Analogues of Cheeger's constant could also be defined, and similar inequalities
+hold.
+
+\subsubsection{Perron-Fr\"obenius Theorem}
+This theorem is a basic result in matrix analysis.
+
+\begin{theorem}
+Let $M$ be a matrix with nonnegative entries. Assume furthermore that $M$ is
+\emph{irreducible} meaning that it is impossible to permute the rows and columns of
+$M$ to place it in the form,
+\begin{eqnarray*}
+M'=\left(
+\begin{array}{cc}
+A & 0\\
+B & C
+\end{array}
+\right)
+\end{eqnarray*}
+with the upper right block having dimension $k\times (n-k)$ for some $k$. Then there
+is a real $\rho_0>0$ such that the following hold:
+\begin{enumerate}[1.]
+\item $\rho_0$ is an eigenvalue of $M$, and all other eigenvalues satisfy $|\rho|\le
+\rho_0$.
+\item The eigenvector corresponding to the eigenvalue $\rho_0$ has nonnegative
+entries.
+\item If there are $k-1$ other eigenvalues with $|\rho_i|=\rho_0$, then they are of
+the form $\rho_0\theta^j$, where $\theta=e^{2\pi i\over k}.$
+\end{enumerate}
+
+\end{theorem}
+
+When translating this theorem into graph theoretic terms and using the facts about
+the transition matrix of a directed graph, the following theorems hold,
+\begin{theorem}
+A strongly connected directed graph $G$ has a maximum eigenvalue $\rho_0$, and that
+eigenvalue has a corresponding non-negative eigenvector. Furthermore,
+$|\rho_i|<\rho_0$ for all $i>1$ iff the GCD of the cycle lengths of $G$ is 1.
+\end{theorem}
+
+\begin{theorem}
+The random walk on a directed graph $G$ converges to a unique stationary
+distribution if $G$ is strongly connected and is not periodic.
+\end{theorem}
