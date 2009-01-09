@@ -1,15 +1,20 @@
-In order to introduce expander graph, the following definitions are of great importance.
+In this section, we discuss a special family of graphs, which is
+called expanders. Roughly speaking, in an expander graph, any
+``small'' subset of vertices has a relatively ``large''
+neighborhood. This concept originated from communication theory, and
+has become more and more important in theoretical computer science.
+You will be convinced after seeing the following concrete
+definitions and applications of an expander.
 
-\subsubsection{Cheeger's Constant}
-Suppose we are given a graph $G=(V,E)$ and a subset $S\subseteq V$. We wish to define the following
-two sets:
+\subsection{Cheeger's Constant}
+Suppose we are given a graph $G=(V,E)$ and a subset $S\subseteq V$.
+We define the border of a subgraph of $G$ as follows,
 \begin{eqnarray*}
     \partial S=\{\{u,v\}|u\in S, v\not\in S\}
 \end{eqnarray*}
-and
-\begin{eqnarray*}
-    \delta S=\{v\not\in S|v\sim u, u\in S\}
-\end{eqnarray*}
+
+Further, the following two quantities are of great importance to
+define an expander graph.
 
 \begin{definition}
     The \emph{Cheeger Ratio} for a vertex set $S$ is
@@ -26,22 +31,84 @@ and
     \end{eqnarray*}
 \end{definition}
 
-\subsubsection{Cheeger's Inequality}
+\subsection{Cheeger's Inequality}
 \begin{theorem}
     For any graph $G$,
-    \begin{eqnarray*}
-        2h_G\ge \lambda_1\ge {h_G^2\over 2}
-    \end{eqnarray*}
+    \begin{eqnarray}
+        2h_G\ge \lambda_1\ge {h_G^2\over 2}\label{cheeger-ineq}
+    \end{eqnarray}
 \end{theorem}
 
-\subsubsection{Expander Graph}
-A family $\mathcal{G}=\{G_1, G_2,\dots\}$ of $d$-regular graphs is an \emph{edge
-expander family} if there is a constant $c>0$ such that $h(G)\ge c$ for each $G\in
-\mathcal{G}$. Typically, we want $d$ to be constant, though it is sometimes also
+\subsection{Expander Graph}
+\begin{definition}
+A family $\mathcal{G}=\{G_1, G_2,\dots\}$ of $d$-regular graphs is
+an \emph{edge expander family} if there is a constant $c>0$ such
+that $h(G)\ge c$ for each $G\in \mathcal{G}$.
+\end{definition}
+Notice that Cheeger's constant measures the number of neighbors that
+a subset adjacent to. Requiring it to be greater than a positive
+constant $c$ is the mathematical description of the requirement
+mentioned above.
+
+Typically, we want $d$ to be constant, though it is sometimes also
 interesting to consider $d=\log{|G|}$ or even $d=|G|^{O(1)}$.
 
-Recall that when considering random walk on a graph, we are specially interested in
-the convergence issue of the walk. Expander graphs are actually a good family of
-graphs, in the sense that random walk on a expander graph converges due to the
-Cheeger's inequality that $h(G)\ge c$ also gives a lower bound of $\lambda_1$,
-meaning that random walks converges ``quickly'' on expander graphs.
+By the definition of an expander, $h_G$ has a positive lower bound
+$c$, and by (\ref{cheeger-ineq}), one may notice that $\lambda_1\ge
+{c^2\over 2}$, and thus $|1-\lambda_1|\le 1-{c^2\over 2}<1$ if $G$
+is not a complete graph, meaning that a random walk on a
+non-bipartite expander converges, and the better the expansion
+property is, the faster the walk converges.
+
+If we define $\alpha=\min{(|\lambda_1|,|\lambda_{n-1}|)}$, then the
+following theorems hold,
+
+\begin{theorem}(\emph{Expander Mixing Lemma})
+Let $G$ be an $d$-regular graph, $S,T\subseteq V$, $E(S,T)$ denotes
+the edges between the sets $S$ and $T$,
+\begin{eqnarray*}
+\left|{|S||T|\over n^2}-{E(S,T)\over dn}\right|\le 1-\alpha
+\end{eqnarray*}
+\end{theorem}
+
+and further, if we denote $B\subset V$ is a set of vertices with
+density $\beta={|B|\over|V|}$. Choose $X_0\in V$ uniformly at
+random, and let $X_0,\dots,X_t$ be a random walk starting at $X_0$.
+Denote by $(B,t)$ the event that the $X_i\in B$, for $\forall i,
+0\le i\le t$.
+
+\begin{theorem}
+\begin{eqnarray*}
+Pr[(B,t)]\le(\beta+1-\alpha)^t
+\end{eqnarray*}
+\end{theorem}
+
+The inequality above can be thought of in the sense that, if the
+underlying graph has good expansion property, and the density of bad
+vertices is relatively small, then with high probability, the random
+walk will hit some good vertices. And if keep walking, with high
+probability, a majority of the vertices visited must be ``good''.
+
+Now consider a BPP style problem, namely, given an instance $x$, if
+it is ``good'', then it is accepted with probability greater than
+$9\over 10$; if it is not ``good'', it is accepted with probability
+no more than $1\over 10$.
+
+A straightforward method to solve this problem is to repeat picking
+vertices uniform randomly for $t$ times, which can reduce the error
+rate to ${1\over 10^t}$. Suppose each trial requires $m$ coin
+tosses, then this algorithm requires totally $m\cdot t$ coins.
+
+Another choice is to think of an $d$-regular expander, such that
+$V=\{0,1\}^m$ representing the domain of all the possible coin
+tosses. Now first toss $m$ coins to determine where to start, and
+then toss $\log{d}$ coins for $t$ times to determine the path of a
+random walk, and finally return the majority of the outputs on these
+inputs. By assuming $(\beta+1-\alpha)$ is small enough, one may
+deduce an exponentially small error bound. This algorithm uses
+totally $m+\log{d}\cdot t=m+O(t)$ coin tosses.
+
+As one may observe above that, the main purpose of utilizing random
+walks on expanders is to reduce the requirement of random bits.
+
+Further applications of expanders are listed in the next section.
