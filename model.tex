@@ -1,4 +1,4 @@
-\subsubsection{Transition Matrix}
+\subsection{Transition Matrix}
 For a graph $G=(V,E)$ we define the \emph{transition probability matrix} $P(u,v)$ by
 \begin{eqnarray*}
 P(u,v)=\left\{
@@ -11,11 +11,12 @@ P(u,v)=\left\{
 where $d_u$ denotes the degree of a vertex $u$ and $u\sim v$ notation for
 $\{u,v\}\in E$.
 
-We represent a distribution on $G$ by a row vector $f$ whose $i$th entry gives the
-``amount'' residing at the $i$th vertex $v_i$. A typical initial distribution might
-be $\overrightarrow{\mathbf{1}}=(1,1,\dots,1)$, or the row vector $e^*_i$ with all
-entries zero except for a one in the $i$th entry. One should note that normalization
-is needed when necessary.
+We represent a distribution on $G$ by a row vector $f$ whose $i$th
+entry gives the ``amount'' residing at the $i$th vertex $v_i$. A
+typical initial distribution might be
+$\overrightarrow{\mathbf{1}}={1\over |V|}(1,1,\dots,1)$, or the row
+vector $e^*_i$ with all entries zero except for a one in the $i$th
+entry.
 
 If $f$ is the initial distribution, then $fP$ is the distribution after one step,
 and $fP^t$ is the distribution after $t$ steps. In a sense, we are considering all
@@ -23,7 +24,7 @@ possible random walks simultaneously; for instance, if $f=e^*_i$, the $j$th entr
 $fP^t$ is the likelihood that if we start a walk at vertex $v_i$ and continue for
 $t$ random steps that we will find ourselves at vertex $v_j$.
 
-\subsubsection{Stable Distributions}
+\subsection{Stable Distributions}
 A distribution $\pi$ is said to be \emph{stable} if the following condition is
 satisfied,
 \begin{eqnarray*}

@@ -1,5 +1,227 @@
-\subsubsection{Definitions}
+\subsection{Four Matrices Related to a Graph}
+For a $n$-vertices graph $G=(V, E)$, the \emph{adjacency matrix} $A$
+for this graph is defined as:
 
-\subsubsection{Facts}
+\begin{eqnarray*}
+A(u,v)=\left\{
+\begin{array}{cc}
+1 & \textrm{if u $\sim$ v}\\
+0 & \textrm{otherwise}
+\end{array}
+\right.
+\end{eqnarray*}
 
-\subsubsection{Upper and Lower Bounds}
+And the \emph{transition matrix} $P$ is simply the adjacency matrix
+normalized so that it is a stochastic matrix. For some basic facts
+of the spectrum of $P$, please refer to the last section.
+
+\begin{eqnarray*}
+P(u,v)=\left\{
+\begin{array}{cc}
+1\over d_u & \textrm{if u $\sim$ v}\\
+0 & \textrm{otherwise}
+\end{array}
+\right.
+\end{eqnarray*}
+
+To facilitate further study, we define another matrix related to
+$G$: the (combinatorial) Laplacian matrix $L$. The definition is
+simple: the combinatorial Laplacian matrix $L$ is just $D-A$.
+
+\begin{eqnarray*}
+L(u,v)=\left\{
+\begin{array}{cc}
+-1 & \textrm{if u $\sim$ v}\\
+1 & \textrm{if $u=v$} \\
+0 & \textrm{otherwise}
+\end{array}
+\right.
+\end{eqnarray*}
+
+The quadratic form of the combinatorial Laplacian has a beautiful
+expression, and is sometimes referred to as the \emph{Dirichlet
+sum}. Notice that for the $i$th node,
+$(fL)(i)=(f(D-A))(i)=f(i)d_i-\sum_{x\sim i}f(x)=\sum_{x\sim
+i}(f(i)-f(x))$, so
+
+\begin{eqnarray*}
+fLf^*=\sum_i \sum_{x\sim i}f(i)(f(i)-f(x))=\sum_{i\sim
+x}(f(x)-f(y))^2
+\end{eqnarray*}
+
+It is immediately seen that the Laplacian is positive semi-definite,
+so its eigenvalues are non-negative.
+
+Another matrix of great importance is the normalized Laplacian
+$\mathcal{L}$, the relation of which with combinatorial Laplacian is
+similar with the relation of transition matrix $P$ with adjacency
+matrix $A$. Recall that $M=D^{-\frac{1}{2}}PD^{-\frac{1}{2}}$, then
+Normalized Laplacian $\mathcal{L}$ is defined as
+$I-M=I-D^\frac{1}{2}PD^{-\frac{1}{2}}=I-D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$.
+From the definition we know $\mathcal{L}=D^\frac{1}{2} L
+D^\frac{1}{2}$.
+
+\begin{eqnarray*}
+\mathcal{L}(u,v)=\left\{
+\begin{array}{cc}
+-1\over \sqrt{d_ud_v} & \textrm{if u $\sim$ v}\\
+1 & \textrm{if $u=v$} \\
+0 & \textrm{otherwise}
+\end{array}
+\right.
+\end{eqnarray*}
+
+Since $M$ is similar to $P$, so the eigenvalues of $\mathcal{L}$ is
+just $\{1-\lambda_i\}_{i\in[n]}$. Let $\mu_i=1-\lambda_i$, so
+$\mu_i$ are ascending and $\mu_1=0$, and $\mu_n\leq2$. Let
+$\{f_i\}_{i\in[n]}$ be the set of eigenvectors of $\mathcal{L}$.
+
+
+\subsection{Basic Properties of Laplacian matrices}
+
+Now we turn our focus to the eigenvalues of $\mathcal{L}$. Here are
+some simple facts, the proofs of which are just a few lines. The
+interesting thing here is that, by considering Laplacian, we get
+another proofs of the properties of spectrum of transition matrix
+$P$. Furthermore, using Laplacian, especially the very useful
+quadratic form of combinatorial Laplacian, we can easily answer the
+questions proposed in the last section.
+
+In order to use the quadratic form of $L$ in the study of
+$\mathcal{L}$, some more tools are needed, namely the Rayleigh
+quotient and Courant-Fischer characterization of eigenvalues.
+
+\begin{definition}
+The \emph{Rayleigh quotient} of a matrix $A$ for a vector $g$,
+$R(g)$ is defined as $\frac{gAg^*}{gg^*}$.
+\end{definition}
+
+\begin{fact}
+Let $f=gD{-\frac{1}{2}}$, then the Rayleigh quotient of Laplacian
+$\mathcal{L}$ is
+\begin{equation*}
+R(g)=R'(f)=\frac{g\mathcal{L}g^*}{gg^*}=\frac{fLf^*}{ff^*}=\frac{\sum_{i\sim
+j} (f(i)-f(j))^2}{\sum_i f^2(i) d_i}
+\end{equation*}
+
+From now on, when we refer to Rayleigh quotient $R(f)$, we use the
+variation $R'(f)=\frac{fLf^*}{ff^*}$. Furthermore, let
+$\{f'_i=fD^{-\frac{1}{2}}\}_{i\in[n]}$ denote the variational
+eigenvectors, which will be called harmonic eigenvectors below.
+\end{fact}
+
+Since $L$ has 0-eigenvector $\overrightarrow{1}=\frac{1}{n}(1, 1,
+\dots, 1)$, from the above we know $\mathcal{L}$ has 0-eigenvector
+$\overrightarrow{1}D^{\frac{1}{2}}$. Courant-Fischer lemma gives us
+a way to characterize the eigenvalues using Rayleigh quotient:
+
+\begin{proposition}
+For graph $G$ and let $R(f)$ be its Rayleigh quotient, then the
+eigenvalues of $\mathcal{L}$ have the following characterization:
+
+\begin{eqnarray*}
+\mu_1 & = &  \overrightarrow{1}D^{\frac{1}{2}}\\
+\mu_2 & = &  \inf_{f: \sum_x f(x)d_x=0}R(f)\\
+&\dots& \\
+\mu_i & = & \sup_{h_k, k\in[i]} \inf_{f: f \vert h_k D, k\in[i]} R(f)\\
+&\dots& \\
+\mu_n & = & \sup_f R(f)\\
+\end{eqnarray*}
+\end{proposition}
+
+Now we can use these tools to exploit the spectrum of $\mathcal{L}$.
+
+\begin{fact}
+For graphs with no self loops and no isolated vertices, we have
+$\sum_{i=0}^{n-1} \mu_i=n.$
+\end{fact}
+
+\begin{proof}
+Note that in this case $\text{trace}\mathcal{L}=n$ since every
+number along the diagonal is 1, and we know $\sum_{i\in[n]}
+mu_i=\text{trace}\mathcal{L}. $
+\end{proof}
+
+\begin{fact} \label{connected}
+The graph $G$ is connected $\Leftrightarrow$ $\mu_2>0$. Moreover,
+the graph has $i+1$ components $\Leftrightarrow$ $\mu_i=0$ and
+$\mu_{i+1}>0$.
+\end{fact}
+
+\begin{proof}
+($\Rightarrow$) From the Courant-Fischer description of $\mu_1=0$,
+we see that for harmonic eigenvectors, if $i\sim j$ then
+$f(i)=f(j)$. So if $G$ is connected, then 0-eigenvectors need to
+have $f(i)=f(j)$ for any $(i, j)\in E$, thus its eigenspace has
+dimension 1, and $\mu_2>0$.
+
+($\Leftarrow$) By contradiction, if $G$ is not connected, let the
+two connected components be $G_1$ and $G_2$. Then the spectrum of
+$G$ is the union of $G_1$ and $G_2$ so eigenvalue 0 appear at least
+twice in $G$'s spectrum.
+\end{proof}
+
+\begin{fact} \label{bipartite}
+The graph is bipartite $\Leftrightarrow$ $\mu_n=2$.
+\end{fact}
+
+\begin{proof}
+($\Rightarrow$)
+
+\begin{eqnarray*}
+R(f) & = & \frac{\sum_{i\sim
+j} (f(i)-f(j))^2}{\sum_i f^2(i) d_i} \\
+& \leq & {{\sum_{i\sim j} (f^2(i)+f^2(j))}\over{\sum_i (f(i))^2 d_i}} \\
+& = & \frac{2\sum_i f^2(i) d_i}{\sum_i f^2(i) d_i} \\
+& = & 2
+\end{eqnarray*}
+
+So if the graph is bipartite, let $V=V_1 \cap V_2$ and $V_1$ and
+$V_2$ are disjoint. And we construct $f$ so that $f(i)=1$ if $i\in
+V_1$ and $f(i)=2$ if $i\in V_2$. Then from the above deduction and
+using the Courant-Fischer lemma of the largest eigenvalue, the
+result holds.
+
+($\Leftarrow$) Since $f'_n$ is the harmonic eigenvector associated
+with the eigenvalue 2, and it goes through the equality of the above
+deduction, we know $f(i)=-f(j)$ for $x\sim y$. So $G$ is
+two-colorable and thus bipartite.
+\end{proof}
+
+So Fact (\ref{connected}) and Fact (\ref{bipartite}) give an answer
+to the question for which type of graphs the random walk converges.
+It turns out that as long as the graph is connected and
+non-bipartite, the random walk always converges to its unique
+distribution, namely $\pi=(\frac{d_u}{text{vol}G})$.
+
+\subsection{Explanation from the Perspective of Markov Chain}
+Since random walk on graph is a Markov process, we would like to
+explain the above facts from the perspective of stochastic process.
+From the textbook we know the two basic facts:
+
+\begin{enumerate}
+\item Irreducible, aperiodic and finite Markov chain has a unique
+stationary distribution;
+\item Irreducible, aperiodic Markov chain is positive recurrent if
+and only if it has a stationary distribution. At this time, its
+stationary distribution is just its limit distribution.
+\end{enumerate}
+
+From the perspective of the two theorems, we only need to find the
+conditions of a random walk on graph is irreducible and aperiodic.
+By simple observation the following claims can be made for
+undirected graphs:
+
+\begin{enumerate}
+\item A graph is irreducible if and only if it is connected;
+\item A graph is aperiodic if and only if it is non-bipartite.
+\end{enumerate}
+
+So here is another perspective on the conditions of a graph to be
+random walk convergent. But for practical applications, one often
+need to build a graph on which the random walk converges
+\emph{fast}. From the last section we know the speed of convergence
+depends on the \emph{spectral gap} $\alpha_G$ of a graph, so the
+problem turns to building graphs with large spectral gap. Before
+addressing this problem, another important connection needs to be
+made: the expansion of a graph and the spectral gap.

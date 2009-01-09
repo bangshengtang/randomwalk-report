@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[11pt]{report}
 \ifx\pdftexversion\undefined
 \usepackage [dvips]{graphicx}
 \else
@@ -8,8 +8,8 @@
 \usepackage{amsthm}
 \usepackage{amsmath}
 \usepackage{palatino}
-\usepackage[german]{babel}
-\usepackage{paralist}
+\usepackage[english]{babel}
+%\usepackage{paralist}
 %\usepackage{mathdots}
 
 \textwidth = 6.5 in
@@ -18,6 +18,7 @@
 \evensidemargin = 0.0 in
 \topmargin = 0.0 in
 \headheight = 0.0 in
+
 \headsep = 0.0 in
 \parskip = 0.2in
 \parindent = 0.0in
@@ -33,48 +34,51 @@
 \newtheorem{openproblem}{Open Problem}
 \newtheorem{digress}{Digression}
 \newtheorem{definition}{Definition}
+\newtheorem{fact}{Fact}
+
 
 \begin{document}
 \title{Random Walks on Graphs, Study Notes}
 \author{Bangsheng Tang, Youming Qiao}
 \date{\today}
-\maketitle
+\maketitle \tableofcontents
 
-\section{Overview}
+\chapter{Overview}
 \input{overview}
 
-\section{Mathematical Aspects}
+\chapter{Mathematical Aspects}
 
-\subsection{The Model}
+\section{The Model}
+
 \input{model}
 
-\subsection{The Issue of Convergence}
+\section{The Issue of Convergence}
 \input{convergence}
 
-\subsection{Spectral Method}
+\section{Spectral Method}
 \input{spectral}
 
-\subsection{Expander Graph}
+\section{Expander Graph}
 \input{expander}
 
-\subsection{Special Topic: On Directed Graphs}
+\section{Random Walk on Directed Graphs}
 \input{direct}
 
-\section{Applications in Theoretical Computer Science}
+\chapter{Applications in Theoretical Computer Science}
 
-\subsection{Amplification}
+\section{Amplification}
 \input{amplification}
 
-\subsection{ST Connectivity Problem}
+\section{ST Connectivity Problem}
 \input{st}
 
-\subsection{A Proof for PCP Theorem}
+\section{A Proof for PCP Theorem}
 \input{pcp}
 
-\section{Applications in Algorithm Design}
+\chapter{Applications in Algorithm Design}
 \input{alg}
 
-\section{Conclusion}
+\chapter{Conclusion}
 \input{conclusion}
 
 \bibliography{ref}

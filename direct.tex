@@ -1,11 +1,20 @@
-\subsubsection{Definitions}
-In contrast to the undirected cases, the transition matrix would not be symmetric
-here.
+For simplicity, the previous sections are devoted mainly to
+undirected graphs, one might figure out that directed cases are also
+of interest. However, as mentioned in previous sections, there are
+some properties hold only in undirected cases. In this section, some
+analogues to undirected cases are given, and the issue of
+convergence is also discussed with the help of a basic matrix
+analytical tool.
+
+\subsection{Definitions}
+The transition matrix is defined exactly the same way with the
+undirected case, but in contrast to the latter, the transition
+matrix is generally not symmetric.
 
 Analogues of Cheeger's constant could also be defined, and similar inequalities
 hold.
 
-\subsubsection{Perron-Fr\"obenius Theorem}
+\subsection{Perron-Fr\"obenius Theorem}
 This theorem is a basic result in matrix analysis.
 
 \begin{theorem}
@@ -22,7 +31,7 @@ B & C
 \end{eqnarray*}
 with the upper right block having dimension $k\times (n-k)$ for some $k$. Then there
 is a real $\rho_0>0$ such that the following hold:
-\begin{enumerate}[1.]
+\begin{enumerate}%[1.]
 \item $\rho_0$ is an eigenvalue of $M$, and all other eigenvalues satisfy $|\rho|\le
 \rho_0$.
 \item The eigenvector corresponding to the eigenvalue $\rho_0$ has nonnegative
@@ -41,7 +50,85 @@ eigenvalue has a corresponding non-negative eigenvector. Furthermore,
 $|\rho_i|<\rho_0$ for all $i>1$ iff the GCD of the cycle lengths of $G$ is 1.
 \end{theorem}
 
+\subsection{Convergence on Directed Graphs}
+As a matter of fact, by the Perron-Fr\"obenius theorem, the
+condition that $G$ is strongly connected and the GCD of the cycle
+lengths in $G$ is $1$ is equivalent to the statement that the norms
+of all eigenvalues of $P$ except for $\rho_0=1$ are less than $1$.
+Thus one may derive the convergence of a random walk from a spectral
+argument.
+
+With the condition stated above, consider probability transition
+matrix $P$, take $P_0=\overrightarrow{1}\phi$, where $\phi$ is the
+row eigenvector of $P$ associated with eigenvalue $\rho_0=1$ with
+positive entries which sum to $1$, and let $M=P-P_0$. The following
+three claims hold.
+
+\begin{claim}
+$P-P_0$ has the same spectral with $P$ except that in $P-P_0$, the
+eigenvalue $1$ is replaced by $0$.
+\end{claim}
+\begin{proof}
+$P_0$ has an eigenvalue of $1$ and $n-1$ multiple eigenvalues of
+$0$. Obviously, $\phi$ is an eigenvector of $P_0$. Thus,
+\begin{eqnarray*}
+\rho\cdot (P-P_0)=\rho\cdot P-\rho\cdot P_0=0
+\end{eqnarray*}
+
+For another eigenvector $v$ for $P$, since it corresponds to a
+different eigenvalue from $1$, it is orthogonal to $\rho$. Namely,
+$v\cdot P_0=0$, and therefore
+\begin{eqnarray*}
+v\cdot(P-P_0)=v\cdot P
+\end{eqnarray*}
+\end{proof}
+
+\begin{claim}
+\begin{eqnarray*}
+(P-P_0)^t=P^t-P_0
+\end{eqnarray*}
+\end{claim}
+
+\begin{proof}
+Use the fact that $P_0\cdot P=P\cdot P_0=P_0^2=P_0$ and the binomial
+expansion.
+\end{proof}
+
+\begin{claim}
+\begin{eqnarray*}
+\lim_{t\to\infty}M^t=0
+\end{eqnarray*}
+\end{claim}
+
+\begin{proof}
+Consider the Jordan decomposition $\Gamma$ of $M$.
+
+\begin{eqnarray*}
+\Gamma^t=\left[
+\begin{array}{cccc}
+B_1^t & 0 & \cdots & 0\\
+0 & B_2^t & \cdots & 0\\
+\ldots & \ldots & \ddots & \vdots\\
+0 & 0 & \cdots & B_n^t
+\end{array}
+\right]
+\end{eqnarray*}
+
+For each Jordan block $B_i$, the corresponding eigenvalue
+$\lambda_i$, has absolute value less than $1$. Let $B_i=\lambda_i
+I+F$ is an $m\times m$ matrix, then
+\begin{eqnarray*}
+B_i^t&=&(\lambda_i I+F)^t\\
+&=&\lambda_i^{t-m+1}\left(\lambda_i^{m-1}I+{t\choose
+1}\lambda_i^{m-2}F+\cdots+{t\choose m-1}\lambda_i^0F^{m-1}\right)
+\end{eqnarray*}
+One may observe that $B_i^t\to 0$ as $t\to\infty$.
+\end{proof}
+
+Combination of these claims gives the convergence of $P$ to $P_0$,
+namely, the following theorem.
 \begin{theorem}
-The random walk on a directed graph $G$ converges to a unique stationary
-distribution if $G$ is strongly connected and is not periodic.
+The random walk on a directed graph $G$ converges to a unique
+stationary distribution if $G$ is strongly connected and is not
+periodic.
 \end{theorem}

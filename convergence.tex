@@ -1,1 +1,150 @@
-test
+\subsection{Introduction} Now we have modeled random walk on graphs
+as a Markov process, for which the transition matrix $P$ is the
+normalized adjacency matrix. That is, $P(i, j)=\frac{1}{d_i} A(i,
+j)$, or let $D$ be the diagonal matrix of degrees (the diagonal
+matrix of $n$ by $n$, and $D(i, i)=$the degree of the vertex $i$),
+then $P=D^{-1}A$. So for this model, what are the interesting
+questions?
+
+From the mathematical perspective, one can definitely ask questions
+about \emph{convergence}, that is the behavior of random walk when
+the number of steps goes to infinity. Related questions are: whether
+the random walk converges, and if so, how fast will it converge?
+
+From the practical perspective, it turns out that convergence
+problems are also very important. That's in many applications, random walk is used as
+a robust way to explore a graph. Since the specific node we would like to visit is not known in
+advance, it would be good for us to know the probability distribution converges
+to some distribution that we can calculate, so that the
+effect of random walk can be estimated.
+
+In order to give satisfying answers to these questions, we will
+first study the spectrums of several matrices related to the
+transition matrices. We think this point of view is both interesting
+and deep: it turns out a large number of graph properties are intimately
+connected with the spectrum of those matrices. In this survey we just cover
+two properties: the convergence of random walk and the expansion of a graph.
+
+In this section, we first show how
+the spectrum of convergence of random walk is connected with the spectrum of
+transition matrix $P$. This motivates us to define some other matrices in the next section,
+which, together with $P$, can be viewed as the variations of adjacency matrix $A$.
+
+\subsection{Basic Properties of Transition Matrix}
+
+Our purpose is to investigate how the spectrum of $P$ controls the
+convergence of random walk. In our discussion the graph has no
+isolated vertices, that is the vertices with degree $=0$.
+
+Let $M=D^{-\frac{1}{2}}PD^{-\frac{1}{2}}$, then $M$ is symmetric and
+from linear algebra we know that $M$ has $n$ real eigenvalues and
+the dimension of its eigenspace is $n$. Then note that
+$P=D^{-1}A=D^{-\frac{1}{2}}MD^\frac{1}{2}$, so $P$ also has the same
+property.
+
+Formally, let $\{\lambda_i\}_{i\in[n]}$ be the set of eigenvalues,
+with $\lambda_i\geq \lambda_j$ if $i<j$, and let ${e_i}_{i\in[n]}$
+denote the corresponding eigenvectors. We just list some basic facts
+of spectrum of $P$ without proof here.
+
+\begin{enumerate}
+\item $P$ has an eigenvalue $1$ with eigenvector $\pi=(\frac
+{d_u}{\text{vol}G})$. (Furthermore, one can see that if the number
+of connected components is $k$, then the eigenspace of eigenvalue 1
+has dimension $k$);
+\item Since $P$ is a stochastic matrix, the absolute values of its
+eigenvalues are less or equal to 1. (First notice the fact that the
+eigenvalues of $P^T$ and $P$ are the same. Then for some eigenvalue
+$\lambda$ and its eigenvector $(x_i)_{i\in [n]}$, and let $x_k$ be
+the component with largest absolute value. So one can easily see
+that $|\lambda x_i|=|\sum_j P^T_{ji} x_j|\leq \sum_j |P^T_{ji} x_j|
+\leq x_i$ so $|\lambda|\leq 1$.)
+\end{enumerate}
+
+\subsection{Transition Matrix and Convergence}
+
+The intuition that the spectrum of $P$ controls the convergence of
+random walk is as follows: from the Markov property of random walk,
+we know that given the initial distribution $v$ and the transition
+matrix $P$, the probability distribution after $t$ steps is just
+$vP^t$. Since $P$ is symmetric, we know $P$, as a linear operator,
+has a set of real eigenvalues and a set of corresponding
+eigenvectors which are orthogonal. That is, if we view the initial
+distribution decomposed in the eigenbasis, the action of $P$ is just
+multiplying the eigenvalues along the components in eigenbasis. So
+if the absolute values of the eigenvalues but one are less than 1,
+after many steps the distribution vector is just the dominating
+eigenvector.
+
+Formally, we have the following lemma answering the question:
+whether the random walk will converge or not.
+
+\begin{lemma}
+Given an undirected graph $G=(V, E)$ without isolated vertices, let
+$P$ be its transition matrix, and
+$M=D^{-\frac{1}{2}}PD^{-\frac{1}{2}}$. $\{\lambda_i\}_{i\in[n]}$ is
+the set of eigenvalues of $M$, with $\lambda_i\geq \lambda_j$ if
+$i<j$, and $\{e_i\}_{i\in[n]}$ denotes the corresponding
+eigenvectors, with $\parallel e_i\parallel =1$. Let
+$\alpha_G=\max{(|\lambda_2|, |\lambda_n|)}$. If $\alpha<1$ then the
+random walk on $G$ will converge to $\pi=(\frac {d_u}{\text{vol}G})$
+for any initial distribution $f$.
+\end{lemma}
+
+\begin{proof}
+Since $e_i$ form an orthonormal basis, the effect of $M$ as a linear
+operator can be decomposed as $\sum_{i\in [n]} \lambda_i e_i^* e_i$,
+in which $e_i^* e_i$ can be understood as the projection onto the
+direction of $e_i$. Also note that $\lambda_1=1$ and
+$e_1=\frac{\sqrt{d_u}}{\sqrt{\text{vol}G}}$. Then
+
+\begin{align}
+\parallel fP^t-\pi \parallel &= \parallel
+fD^{-\frac{1}{2}}M^tD^{\frac{1}{2}}- \pi \parallel \\
+&=\parallel fD^{-\frac{1}{2}}\sum_{i\in[n]\setminus
+\{1\}}(\lambda_i^t e_i^*
+e_i)D^{\frac{1}{2}}+fD^{-\frac{1}{2}}\lambda_1 e_1^* e_1
+D^{\frac{1}{2}}- \pi \parallel \\
+&=\parallel fD^{-\frac{1}{2}}\sum_{i\in[n]\setminus
+\{1\}}(\lambda_i^t e_i^* e_i)D^{\frac{1}{2}} \parallel \\
+&\leq \max_{i\in[n]\setminus \{1\}}|\lambda_i|^t\cdot
+(\frac{\max_u\sqrt{d_u}}{\min_v{\sqrt{d_v}}}) \\
+&= \alpha^t \cdot(\frac{\max_u\sqrt{d_u}}{\min_v{\sqrt{d_v}}})
+\end{align}
+
+So if $\alpha<1$, this inequality gives the existence and uniqueness
+of a stationary distribution.
+\end{proof}
+
+Furthermore, this inequality will give us an idea of how \emph{fast}
+the random walk will converge: it depends on the \emph{eigenvalue
+gap} $1-\alpha$.
+
+\begin{definition}
+If the random walk on $G$ converges, then the mixing time $t$ of a
+random walk on graph $G$ is $t=\inf_y{\parallel yP^t-\pi \parallel
+\leq \frac{1}{n^3}}$.
+\end{definition}
+
+\begin{corollary}
+If for graph $G$, $\alpha_G < 1$, then the mixing time is of order
+$O(\log n/(1-\alpha_G))$.
+\end{corollary}
+
+\begin{proof}
+Since $\parallel fP^t-\pi \parallel \leq \alpha^t
+\cdot(\frac{\max_u\sqrt{d_u}}{\min_v{\sqrt{d_v}}})$ for any $f$, so
+if we require $\parallel fP^t-\pi \parallel \leq \frac{1}{n^3}$ we
+just need $\alpha^t
+\cdot(\frac{\max_u\sqrt{d_u}}{\min_v{\sqrt{d_v}}}) = \frac{1}{n^3}$.
+That is $t=\frac{\log n} {\log (1/\alpha)}$. Since most of the time
+$\alpha$ is close to 1, there is an approximation $\log (1/\alpha) =
+1-\alpha$ and the result follows.
+\end{proof}
+
+So not only $\alpha$ reflects the convergence of the random walk,
+but also the spectral gap $1-\alpha_G$ controls the speed of the
+convergence. Now the question goes to determine which type of graphs
+has large eigenvalue gap, and in order to answer this question, we
+first study some other matrices that are related to a graph, namely
+the Laplacian matrix of a graph.
