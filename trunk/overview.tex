@@ -1,1 +1,38 @@
-test
+Random walk on graph is an interdisciplinary area of graph theory
+and random walk theory. Due to the importance of graphs in computer
+science as a modeling tool, random walk on graphs has become a
+frequent method in algorithm design and complexity theory.
+
+Some examples of application of random walk are as follows:
+
+\begin{enumerate}
+\item In algorithm design, since random walk is simple to implement,
+and it has the local property (doesn't depend on the whole structure
+of the graph), thus having good adaptability when graph changes, so
+it enjoys wide application in communication network;
+\item In graph theory, expander is a type of sparse graph that has a
+good connectivity. In recent years, the theory of expander has made
+a large progress, including its construction, analysis and
+application. Since it combines two seemingly contradictory
+properties, we see many application in coding theory and
+pseudo-randomness theory. An important perspective of expander is
+just the random walk: random walk on expanders converges fast (in
+time $O(\log n)$;
+\item In complexity theory, an important result is that we only need
+deterministic log-space to test the connectivity of two vertices.
+The basic technique for this result is: first we start with an
+arbitrary graph, and consider the random walk on it. By constructing
+good expander from the initial graph while preserving the
+connectivity, one can show that the connectivity of two nodes is in
+log-space;
+\item In quantum computing, an important technique of algorithm
+design is the quantum counterpart of random walk. For some problems,
+this technique has helped to design some of the most efficient
+algorithms, and some of them are proved to optimal.
+\end{enumerate}
+
+In this survey, we are going to study some of the basic concepts and
+techniques motivated by random walk on graphs. Our main focus is on
+undirected graph, with some efforts on directed case. Another
+feature of this survey would be the perspective of the theory of
+Markov chains, especially the limit distribution and mixing time.
