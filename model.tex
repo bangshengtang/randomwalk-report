@@ -1,5 +1,43 @@
-\subsection{Transition Matrix}
-For a graph $G=(V,E)$ we define the \emph{transition probability matrix} $P(u,v)$ by
+\subsection{Basic Notations}
+Let $[n]$ denote the set of integers ${1, 2, \dots, n}$.
+
+Remember a finite graph $G$ is a two tuple $(V, E)$. So
+$V=[n]$ is the set of vertices, and an edge is represented as the two tuple $(i, j)$, $i, j\in[n]$.
+So $E$ can be regarded as a relation $E: V\times V \rightarrow \mathbb{N}$, such that $E(i, j)$
+represents the number of edges between $i$ and $j$. Or if we do not allow multiple edges, $E$
+can be thought of as some subset of $2^{V\times V}$, such that if there is an edge between
+$i$ and $j$ if and only if $(i, j)\in E$. Most of the time we would be dealing with
+graphs that don't have multiple edges.
+
+The graph is called undirected if $(i, j)\in E$ implies $(j, i)\in E$. The graph
+is directed if the above condition doesn't hold. The neighbor of a vertex $i$ is $\{k|k\in V,
+(i, k)\in E\}$, denoted as $Nb(i)$. The adjacency matrix $A_G$ of a graph $G$ is just
+$A(i, j)=E(i, j)$.
+
+A (discrete finite) Markov chain is stochastic process ${X_n, n\geq 0|X_n\in [m]}$ such that
+for any $i_0, i_1, \dots, i_n, \\ i_{n+1}\in S$, $n\in \mathbb{N}$, and $\Pr [X_j=i_j, j\in [n]]>0]$,
+we have
+
+\begin{eqnarray*}
+\Pr [X_{n+1}=i_{n+1}|X_j=i_j, j\in [n]]=\Pr [X_{n+1}=i_{n+1}|X_n=i_n]
+\end{eqnarray*}
+
+The intuition behind the Markov chain is that the future only depends on the current
+state, having no relation with the history. Then one can define the (one step) transition
+matrix $P(i, j)$ of a Markov chain as the probability that $i$ transfers to $j$ in one step.
+And we can model the state at time $t$ as the distribution vector $\alpha_t$, with $\alpha_t(i)$
+to be the probability that the system is at state $i$ at time $t$. So $\alpha_{t+1}=\alpha_t P$.
+
+\subsection{Random Walk on Graphs}
+
+Having defined the basic notions of graphs and Markov chain, let's look at what's the
+random walk on graph like. Let the state space be the set of vertices $V$. When
+the walker is at a specific vertex $i$, it flips a possibly biased coin to
+select one vertex randomly from its neighbors and
+goes there. Often we would have the coin unbiased, that is the probability of going
+to any neighbor is the same. It is clear that random walk on graphs is a Markov chain.
+
+For a graph $G=(V,E)$ we define the \emph{transition probability matrix} $P_G(u,v)$ by
 \begin{eqnarray*}
 P(u,v)=\left\{
 \begin{array}{cc}
