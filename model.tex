@@ -14,7 +14,7 @@ is directed if the above condition doesn't hold. The neighbor of a vertex $i$ is
 (i, k)\in E\}$, denoted as $Nb(i)$. The adjacency matrix $A_G$ of a graph $G$ is just
 $A(i, j)=E(i, j)$.
 
-A (discrete finite) Markov chain is stochastic process ${X_n, n\geq 0|X_n\in [m]}$ such that
+A (discrete finite) Markov chain is stochastic process $\{X_n, n\geq 0|X_n\in [m]\}$ such that
 for any $i_0, i_1, \dots, i_n, \\ i_{n+1}\in S$, $n\in \mathbb{N}$, and $\Pr [X_j=i_j, j\in [n]]>0]$,
 we have
 
@@ -23,7 +23,7 @@ we have
 \end{eqnarray*}
 
 The intuition behind the Markov chain is that the future only depends on the current
-state, having no relation with the history. Then one can define the (one step) transition
+state, while having no relation with the history. Then one can define the (one step) transition
 matrix $P(i, j)$ of a Markov chain as the probability that $i$ transfers to $j$ in one step.
 And we can model the state at time $t$ as the distribution vector $\alpha_t$, with $\alpha_t(i)$
 to be the probability that the system is at state $i$ at time $t$. So $\alpha_{t+1}=\alpha_t P$.
